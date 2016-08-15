@@ -20,8 +20,8 @@
 # Get the absolute path of the bin directory
 BIN_DIR=$(cd $(dirname $0) && pwd)
 
-$BUILD_DIR=$1
-$CACHE_DIR=$2
+BUILD_DIR=$1
+CACHE_DIR=$2
 
 . $BIN_DIR/../lib/utils
 

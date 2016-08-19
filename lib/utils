@@ -53,6 +53,8 @@ install_docker() {
     # Make the docker executable accessible to the project
     cp -r "$cache_dir/$home/." "$build_dir/$home"
     export PATH="$build_dir/$home:$PATH"
+    curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > /usr/local/bin/docker-machine && \
+    chmod +x /usr/local/bin/docker-machine
 }
 
 install_mongo() {

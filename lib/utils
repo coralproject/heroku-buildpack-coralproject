@@ -48,13 +48,14 @@ install_docker() {
         echo "Downloading Docker..."
         rm -rf "$cache_dir/$home" && mkdir -p "$cache_dir/$home"
         curl -s $url | tar xvz -C "$cache_dir/$home" --strip-components=1
+        curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname` -m > $cache_dir/$home/docker-machine
+        chmod +x $cache_dir/$home/docker-machine
     fi
 
     # Make the docker executable accessible to the project
     cp -r "$cache_dir/$home/." "$build_dir/$home"
     export PATH="$build_dir/$home:$PATH"
-    curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > /usr/local/bin/docker-machine && \
-    chmod +x /usr/local/bin/docker-machine
+    find $cache_dir/$home -type f -exec chmod +x {} \;
 }
 
 install_mongo() {
@@ -80,4 +81,5 @@ install_mongo() {
     # Make the docker executable accessible to the project
     cp -r "$cache_dir/$home/." "$build_dir/$home"
     export PATH="$build_dir/$home:$PATH"
+    find $cache_dir/$home -type f -exec chmod +x {} \;
 }

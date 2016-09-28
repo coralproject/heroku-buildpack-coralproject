@@ -45,27 +45,24 @@ install_docker() {
 
     # Check to see if Docker has already been installed in the cache
     if [ ! -d "${cache_dir}/$home" ]; then
-        echo "Downloading Docker...\n"
+        echo "Downloading Docker..."
         rm -rf "$cache_dir/$home" && mkdir -p "$cache_dir/$home"
         curl -s $url | tar xvz -C "$cache_dir/$home" --strip-components=1
 
         # Download docker-compose
-        curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > "$cache_dir/$home"/docker-compose
-        chmod +x "$cache_dir/$home"/docker-compose
+        curl -L https://github.com/docker/compose/releases/download/1.8.0/docker-compose-`uname -s`-`uname -m` > "$cache_dir/$home/docker-compose"
+        chmod +x "$cache_dir/$home/docker-compose"
+        echo "Downloaded docker-compose"
 
         # Download docker-machine
-        curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > "$cache_dir/$home"/docker-machine
-        chmod +x "$cache_dir/$home"/docker-machine
+        curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > "$cache_dir/$home/docker-machine"
+        chmod +x "$cache_dir/$home/docker-machine"
+        echo "Downloaded docker-machine"
     fi
 
     # Make the docker executable accessible to the project
     cp -r "$cache_dir/$home/." "$build_dir/$home"
     export PATH="$build_dir/$home:$PATH"
-    curl -L https://github.com/docker/machine/releases/download/v0.7.0/docker-machine-`uname -s`-`uname -m` > /usr/local/bin/docker-machine && \
-    chmod +x /usr/local/bin/docker-machine
-    apt-get -y install python-pip
-    pip install docker-compose
-    usermod -aG docker $(whoami)
 }
 
 install_mongo() {
@@ -88,7 +85,7 @@ install_mongo() {
         curl -s $url | tar xvz -C "$cache_dir/$home" --strip-components=1
     fi
 
-    # Make the docker executable accessible to the project
+    # Make the mongo executable accessible to the project
     cp -r "$cache_dir/$home/." "$build_dir/$home"
     export PATH="$build_dir/$home:$PATH"
 }

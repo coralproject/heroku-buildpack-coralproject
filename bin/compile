@@ -115,7 +115,7 @@ cd \$HOME
 
 # Start Cay
 cd cay
-sed -i "s/server.listen(3000, 'localhost', function(err) {/server.listen(\$PORT, 'localhost', function(err) {/g" dev-server.js
+sed -i "s/server.listen(3000, 'localhost', function(err) {/server.listen(\$PORT, '0.0.0.0', function(err) {/g" dev-server.js
 npm start &
 cd \$HOME
 EOF

@@ -27,22 +27,25 @@ mkdir -p $SCRIPTS
 wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
 tar xvfz go*
 rm go*.tar.gz
-echo 'PATH=$PATH:$HOME/go/bin' > $CORAL_SCRIPT
-echo 'export GOROOT=$HOME/go' > $CORAL_SCRIPT
-echo 'export GOPATH=$HOME' > $CORAL_SCRIPT
+echo 'PATH=$PATH:$HOME/go/bin' >> $CORAL_SCRIPT
+echo 'export GOROOT=$HOME/go' >> $CORAL_SCRIPT
+echo 'export GOPATH=$HOME' >> $CORAL_SCRIPT
 export PATH=$PATH:$BUILD/go/bin
 export GOROOT=$BUILD/go
 export GOPATH=$BUILD
+cd $BUILD
 
 # Install Node
 wget https://nodejs.org/dist/v6.7.0/node-v6.7.0-linux-x64.tar.xz
 tar xvf node*
 rm node*.tar.xz
 mv node* node
-echo 'PATH=$PATH:$HOME/node/bin' > $CORAL_SCRIPT
+echo 'PATH=$PATH:$HOME/node/bin' >> $CORAL_SCRIPT
+cd $BUILD
 
 # Download askd via Shelf
 go get github.com/coralproject/shelf
+cd $BUILD
 
 # Download Elkhorn
 git clone https://github.com/coralproject/elkhorn.git
@@ -109,9 +112,9 @@ npm start &
 cd \$HOME
 EOF
 chmod +x $BUILD/bin/coral
-echo 'PATH=$PATH:$BUILD/bin' > $CORAL_SCRIPT
+echo 'PATH=$PATH:$BUILD/bin' >> $CORAL_SCRIPT
 
 # Make sure the PATH is set correctly
-echo 'export PATH=$PATH' > $CORAL_SCRIPT
+echo 'export PATH=$PATH' >> $CORAL_SCRIPT
 
 exit 0

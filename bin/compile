@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# @author Jeff Nelson (jeff@mozillafoundation.org)
 # bin/compile <build-dir> <cache-dir>
 
 BUILD=$1
@@ -47,6 +48,14 @@ cd $BUILD
 # Download askd via Shelf
 go get github.com/coralproject/shelf
 cd $BUILD
+echo "export XENIA_MONGO_HOST=`echo $MONGODB_URI | cut -d '@' -f 2 | cut -d '/' -f 1`" >> $CORAL_SCRIPT
+echo "export XENIA_MONGO_USER=`echo $MONGODB_URI | cut -d ':' -f 2 | cut -d '/' -f 3`" >> $CORAL_SCRIPT
+echo "export XENIA_MONGO_AUTHDB=`echo $MONGODB_URI | cut -d '/' -f 4`" >> $CORAL_SCRIPT
+echo "export XENIA_MONGO_DB=`echo $MONGODB_URI | cut -d '/' -f 4`" >> $CORAL_SCRIPT
+echo "export XENIA_MONGO_PASS=`echo $MONGODB_URI | cut -d ':' -f 3 | cut -d '@' -f 1`" >> $CORAL_SCRIPT
+echo "export XENIA_AUTH_PUBLIC_KEY=" >> $CORAL_SCRIPT
+echo "export XENIA_LOGGING_LEVEL=1" >> $CORAL_SCRIPT
+echo "export XENIA_HOST=:16181" >> $CORAL_SCRIPT
 
 # Download Elkhorn
 git clone https://github.com/coralproject/elkhorn.git
@@ -58,6 +67,7 @@ cd $BUILD
 # Download Cay
 git clone https://github.com/coralproject/cay.git
 cd cay
+
 cat << EOF >> public/config.json
 {
   "xeniaHost": "http://localhost:16181",
@@ -77,25 +87,19 @@ cat << EOF >> public/config.json
   "recaptcha": false
 }
 EOF
+
 cd $BUILD
 mv $BUILD/cay/src/app/layout/Sidebar/* $BUILD/cay/src/app/layout/sidebar
 
 # Create a start script for coral
 mkdir -p $BUILD/bin
+
 cat << EOF >> $BUILD/bin/coral
 #!/usr/bin/env bash
 
 # Start askd via Shelf
 cd \$GOPATH/src/github.com/coralproject/shelf/cmd/askd
 go build
-export XENIA_MONGO_HOST=`echo \$MONGODB_URI | cut -d '@' -f 2 | cut -d '/' -f 1`
-export XENIA_MONGO_USER=`echo \$MONGODB_URI | cut -d ':' -f 2 | cut -d '/' -f 3`
-export XENIA_MONGO_AUTHDB=`echo \$MONGODB_URI | cut -d '/' -f 4`
-export XENIA_MONGO_DB=`echo \$MONGODB_URI | cut -d '/' -f 4`
-export XENIA_MONGO_PASS=`echo \$MONGODB_URI | cut -d ':' -f 3 | cut -d '@' -f 1`
-export XENIA_AUTH_PUBLIC_KEY=
-export XENIA_LOGGING_LEVEL=1
-export XENIA_HOST=:16181
 cd \$HOME
 \$GOPATH/src/github.com/coralproject/shelf/cmd/askd/askd &
 
@@ -112,6 +116,7 @@ npm install
 npm start &
 cd \$HOME
 EOF
+
 chmod +x $BUILD/bin/coral
 echo 'PATH=$PATH:$HOME/bin' >> $CORAL_SCRIPT
 

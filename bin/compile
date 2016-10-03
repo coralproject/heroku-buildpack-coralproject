@@ -24,6 +24,7 @@ CORAL_SCRIPT=$SCRIPTS/coral.sh
 mkdir -p $SCRIPTS
 
 # Install Go
+cd $BUILD
 wget https://storage.googleapis.com/golang/go1.7.1.linux-amd64.tar.gz
 tar xvfz go*
 rm go*.tar.gz
@@ -112,7 +113,7 @@ npm start &
 cd \$HOME
 EOF
 chmod +x $BUILD/bin/coral
-echo 'PATH=$PATH:$BUILD/bin' >> $CORAL_SCRIPT
+echo 'PATH=$PATH:$HOME/bin' >> $CORAL_SCRIPT
 
 # Make sure the PATH is set correctly
 echo 'export PATH=$PATH' >> $CORAL_SCRIPT

@@ -93,10 +93,10 @@ cat << EOF >> public/config.json
 }
 EOF
 
+mv $BUILD/cay/src/app/layout/Sidebar/* $BUILD/cay/src/app/layout/sidebar
+rm -rf $BUILD/cay/src/app/layout/Sidebar/
 npm install
 cd $BUILD
-mv $BUILD/cay/src/app/layout/Sidebar/* $BUILD/cay/src/app/layout/sidebar
-rm -rf $BUILD/cay/src/app/layout/Sidebar
 
 # Create a start script for coral
 cd $BUILD

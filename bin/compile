@@ -68,7 +68,7 @@ cd $BUILD
 git clone https://github.com/coralproject/elkhorn.git
 cd elkhorn
 cp config.sample.json config.json
-sed -i 's/  "askHost": "https:\/\/my-ask-service.com",/  "askHost": "http:\/\/localhost:16181",/g' config.json
+sed -i 's/  "askHost": "https:\/\/my-ask-service.com",/  "askHost": "http:\/\/0.0.0.0:16181",/g' config.json
 npm install
 
 # Download Cay
@@ -78,10 +78,10 @@ cd cay
 
 cat << EOF >> public/config.json
 {
-  "xeniaHost": "http://localhost:16181",
-  "askHost": "http://localhost:16181",
+  "xeniaHost": "http://0.0.0.0:16181",
+  "askHost": "http://0.0.0.0:16181",
   "trustHost": "",
-  "elkhornHost": "http://localhost:4444",
+  "elkhornHost": "http://0.0.0.0:4444",
   "elkhornStaticHost": "",
   "environment": "development",
   "brand": "Coral Project",

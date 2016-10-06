@@ -36,6 +36,8 @@ export PATH=$PATH:$BUILD/go/bin
 export GOROOT=$BUILD/go
 export GOPATH=$BUILD
 rm -rf $BUILD/go/test
+rm -rf $BUILD/go/blog
+rm -rf $BUILD/go/doc
 cd $BUILD
 
 # Install Node

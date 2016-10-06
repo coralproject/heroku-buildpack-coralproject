@@ -35,6 +35,7 @@ echo 'export GOPATH=$HOME' >> $CORAL_SCRIPT
 export PATH=$PATH:$BUILD/go/bin
 export GOROOT=$BUILD/go
 export GOPATH=$BUILD
+rm -rf $BUILD/go/test
 cd $BUILD
 
 # Install Node
@@ -78,7 +79,7 @@ cat << EOF >> public/config.json
   "xeniaHost": "http://localhost:16181",
   "askHost": "http://localhost:16181",
   "trustHost": "",
-  "elkhornHost": "http://localhost:4444.",
+  "elkhornHost": "http://localhost:4444",
   "elkhornStaticHost": "",
   "environment": "development",
   "brand": "Coral Project",
@@ -93,8 +94,6 @@ cat << EOF >> public/config.json
 }
 EOF
 
-mv $BUILD/cay/src/app/layout/Sidebar/* $BUILD/cay/src/app/layout/sidebar
-rm -rf $BUILD/cay/src/app/layout/Sidebar/
 npm install
 cd $BUILD
 

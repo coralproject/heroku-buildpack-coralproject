@@ -92,7 +92,8 @@ cat << EOF >> public/config.json
     "trust": false,
     "ask": true
   },
-  "recaptcha": false
+  "recaptcha": false,
+  "proxy": true
 }
 EOF
 

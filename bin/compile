@@ -80,6 +80,7 @@ npm install
 cd $BUILD
 git clone https://github.com/coralproject/cay.git
 cd cay
+git checkout 021bd5b65bcf5b8395c8b769af1f455bfdbd94c3
 rm -rf .git
 
 cat << EOF >> public/config.json

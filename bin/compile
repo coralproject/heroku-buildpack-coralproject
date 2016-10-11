@@ -72,6 +72,7 @@ git clone https://github.com/coralproject/elkhorn.git
 cd elkhorn
 cp config.sample.json config.json
 sed -i 's/  "askHost": "https:\/\/my-ask-service.com",/  "askHost": "http:\/\/0.0.0.0:16181",/g' config.json
+sed -i "53s/.*/  return '\/elkhorn\/widgets\/'/" server/index.js
 npm install
 
 # Download Cay

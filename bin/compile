@@ -70,6 +70,7 @@ go build
 cd $BUILD
 git clone https://github.com/coralproject/elkhorn.git
 cd elkhorn
+rm -rf .git
 cp config.sample.json config.json
 sed -i 's/  "askHost": "https:\/\/my-ask-service.com",/  "askHost": "http:\/\/0.0.0.0:16181",/g' config.json
 sed -i "53s/.*/  return '\/elkhorn\/widgets\/'/" server/index.js
@@ -79,7 +80,7 @@ npm install
 cd $BUILD
 git clone https://github.com/coralproject/cay.git
 cd cay
-git checkout 021bd5b65bcf5b8395c8b769af1f455bfdbd94c3
+rm -rf .git
 
 cat << EOF >> public/config.json
 {

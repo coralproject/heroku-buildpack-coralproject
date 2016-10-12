@@ -85,6 +85,7 @@ cd cay
 git checkout 021bd5b65bcf5b8395c8b769af1f455bfdbd94c3
 sed -i 's/\${form\.settings\.baseUrl}/\${window\.location\.origin}\/elkhorn\/widgets\//g' src/forms/FormBuilderSidebar.js
 sed -i 's/\${gallery\.config\.baseUrl}/\${window\.location\.origin}\/elkhorn\/widgets\//g' src/app/GalleryManager.jsx
+sed -i 's/\${gallery\.config\.baseUrl}/\${window\.location\.origin}\/elkhorn\/widgets\//g' src/forms/GalleryPreview.jsx
 
 rm -rf .git
 

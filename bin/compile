@@ -52,6 +52,9 @@ cd $BUILD
 # Download askd via Shelf
 go get github.com/coralproject/shelf
 cd $BUILD
+cd $GOPATH/src/github.com/coralproject/shelf/
+git checkout 0aaf08a6576a04a7e2e518488003e5c8c8c422d9
+cd $BUILD
 echo "export XENIA_MONGO_HOST=\$(echo \$MONGODB_URI | cut -d '@' -f 2 | cut -d '/' -f 1)" >> $CORAL_SCRIPT
 echo "export XENIA_MONGO_USER=\$(echo \$MONGODB_URI | cut -d ':' -f 2 | cut -d '/' -f 3)" >> $CORAL_SCRIPT
 echo "export XENIA_MONGO_AUTHDB=\$(echo \$MONGODB_URI | cut -d '/' -f 4)" >> $CORAL_SCRIPT
